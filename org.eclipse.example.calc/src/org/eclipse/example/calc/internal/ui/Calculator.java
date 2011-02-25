@@ -74,6 +74,7 @@ public class Calculator extends JFrame implements ActionListener {
 		setTitle("Simple Calculator");
 		Container c = getContentPane();
 		c.setLayout(new BorderLayout());
+		setLocationByPlatform(true);
 
 		setupDisplay(c);
 		setupButtonsPanel(c);
