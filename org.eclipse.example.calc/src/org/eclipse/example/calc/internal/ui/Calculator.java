@@ -37,14 +37,21 @@ public class Calculator extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private String cmd;
+
 	private boolean clearDisplay;
+
 	private float value;
 
 	private JTextField display;
+
 	private JPanel buttonsPanel;
+
 	private JPanel numberButtonsPanel;
+
 	private JPanel cmdButtonsPanel;
+
 	private JButton numberButtons[];
+
 	private JButton cmdButtons[];
 
 	public static void main(String args[]) {
@@ -162,32 +169,36 @@ public class Calculator extends JFrame implements ActionListener {
 		// get current value of display
 		curValue = Float.parseFloat(display.getText());
 
-		if (cmd == null || cmd.equals("")) {
-			// if no command was saved previously, save this one and clear
+		Operation currentOp = Operations.INSTANCE.getOperation(cmdName);
+		if ((currentOp instanceof BinaryOperation) && (cmd == null)) {
+			// if last clicked operation was binary and there is no saved
+			// operation, store it
 			cmd = cmdName;
 			clearDisplay = true;
 		} else {
-			// perform the saved command
-			Operation op = Operations.INSTANCE.getOperation(cmd);
-			assert (op != null);
-			if (op instanceof BinaryOperation) {
-				BinaryOperation bop = (BinaryOperation) op;
+			// if saved command is binary perform it
+			Operation savedOp = Operations.INSTANCE.getOperation(cmd);
+			if (savedOp instanceof BinaryOperation) {
+				BinaryOperation bop = (BinaryOperation) savedOp;
 				newValue = bop.perform(value, curValue);
-			} else if (op instanceof UnaryOperation) {
-				UnaryOperation uop = (UnaryOperation) op;
+			} // if current operation is unary perform it
+			else if (currentOp instanceof UnaryOperation) {
+				UnaryOperation uop = (UnaryOperation) currentOp;
 				newValue = uop.perform(curValue);
 			}
 
-			// display the result and order to clear
+			// display the result and prepare clear on next button
 			display.setText("" + newValue);
 			clearDisplay = true;
-
-			if (cmdName.equals("=")) {
-				// do not save = command
+			if (currentOp instanceof Equals) {
+				// do not save "=" command
 				cmd = null;
-			} else {
-				// save other commands
+			} else if (currentOp instanceof BinaryOperation) {
+				// save binary commands as they are executed on next operation
 				cmd = cmdName;
+			} else {
+				// clear saved command
+				cmd = null;
 			}
 		}
 
