@@ -6,7 +6,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.example.calc.internal.ui;
+package org.eclipse.example.calc.internal.ui.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -19,28 +19,21 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.border.TitledBorder;
 
-import org.eclipse.example.calc.BinaryOperation;
-import org.eclipse.example.calc.Operation;
 import org.eclipse.example.calc.Operations;
-import org.eclipse.example.calc.UnaryOperation;
-import org.eclipse.example.calc.internal.operations.Equals;
-import org.eclipse.example.calc.internal.operations.Minus;
-import org.eclipse.example.calc.internal.operations.Plus;
-import org.eclipse.example.calc.internal.operations.Square;
+import org.eclipse.example.calc.internal.Calculator;
+import org.eclipse.example.calc.internal.TextProvider;
 
 /*
  * A simple calculator featuring a Swing UI.
  */
-public class Calculator extends JFrame implements ActionListener {
+public class CalculatorUI extends JFrame implements TextProvider,
+		ActionListener {
 	private static final long serialVersionUID = 1L;
 
-	private String cmd;
-
-	private boolean clearDisplay;
-
-	private float value;
+	private Calculator calculator;
 
 	private JTextField display;
 
@@ -55,23 +48,17 @@ public class Calculator extends JFrame implements ActionListener {
 	private JButton cmdButtons[];
 
 	public static void main(String args[]) {
-		new Calculator().setVisible(true);
+		new CalculatorUI().setVisible(true);
 	}
 
-	public Calculator() {
-		setupOperations();
+	public CalculatorUI() {
+		calculator = new Calculator(this);
 		setupGUI();
-	}
-
-	private void setupOperations() {
-		new Equals();
-		new Minus();
-		new Plus();
-		new Square();
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 
 	private void setupGUI() {
-		setTitle("Simple Calculator");
+		setTitle(Calculator.NAME);
 		Container c = getContentPane();
 		c.setLayout(new BorderLayout());
 		setLocationByPlatform(true);
@@ -89,7 +76,7 @@ public class Calculator extends JFrame implements ActionListener {
 		display.setHorizontalAlignment(JTextField.TRAILING);
 		c.add(display, BorderLayout.NORTH);
 		// initially clear the display
-		clearDisplay = true;
+		calculator.setClearText(true);
 	}
 
 	private void setupButtonsPanel(Container c) {
@@ -141,67 +128,17 @@ public class Calculator extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		String str = e.getActionCommand();
-		if (isCommand(str)) {
-			calculate(str);
-		} else {
-			char digit = (str.toCharArray())[0];
-			if (Character.isDigit(digit) || digit == '.') {
-				if (clearDisplay) {
-					// save current value and clear the display
-					value = Float.parseFloat(display.getText());
-					display.setText("");
-					clearDisplay = false;
-				}
-
-				// add new digit to display
-				display.setText(display.getText() + digit);
-			}
-		}
+		calculator.handleButtonClick(str);
 	}
 
-	private boolean isCommand(String name) {
-		return (Operations.INSTANCE.getOperation(name) != null);
+	@Override
+	public void setDisplayText(String text) {
+		display.setText(text);
 	}
 
-	private void calculate(String cmdName) {
-		float curValue;
-		float newValue = 0;
-
-		// get current value of display
-		curValue = Float.parseFloat(display.getText());
-
-		Operation currentOp = Operations.INSTANCE.getOperation(cmdName);
-		if ((currentOp instanceof BinaryOperation) && (cmd == null)) {
-			// if last clicked operation was binary and there is no saved
-			// operation, store it
-			cmd = cmdName;
-			clearDisplay = true;
-		} else {
-			// if saved command is binary perform it
-			Operation savedOp = Operations.INSTANCE.getOperation(cmd);
-			if (savedOp instanceof BinaryOperation) {
-				BinaryOperation bop = (BinaryOperation) savedOp;
-				newValue = bop.perform(value, curValue);
-			} // if current operation is unary perform it
-			else if (currentOp instanceof UnaryOperation) {
-				UnaryOperation uop = (UnaryOperation) currentOp;
-				newValue = uop.perform(curValue);
-			}
-
-			// display the result and prepare clear on next button
-			display.setText("" + newValue);
-			clearDisplay = true;
-			if (currentOp instanceof Equals) {
-				// do not save "=" command
-				cmd = null;
-			} else if (currentOp instanceof BinaryOperation) {
-				// save binary commands as they are executed on next operation
-				cmd = cmdName;
-			} else {
-				// clear saved command
-				cmd = null;
-			}
-		}
-
+	@Override
+	public String getDisplayText() {
+		return display.getText();
 	}
+
 }
