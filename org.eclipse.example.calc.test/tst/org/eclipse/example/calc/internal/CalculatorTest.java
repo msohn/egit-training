@@ -80,13 +80,11 @@ public class CalculatorTest {
 
 		private String text = "0";
 
-		@Override
 		public void setDisplayText(String text) {
 			this.text = text;
 
 		}
 
-		@Override
 		public String getDisplayText() {
 			return text;
 		}
