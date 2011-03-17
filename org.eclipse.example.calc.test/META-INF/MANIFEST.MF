@@ -5,7 +5,6 @@ Bundle-SymbolicName: org.eclipse.example.calc.test
 Bundle-Version: 0.1.0.qualifier
 Fragment-Host: org.eclipse.example.calc;bundle-version="[0.1.0,0.2.0)"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.junit4;bundle-version="[4.3.0,5.0.0)",
- org.hamcrest;bundle-version="[1.1.0,2.0.0)"
+Require-Bundle: org.junit4;bundle-version="[4.3.0,5.0.0)"
 Import-Package: org.eclipse.example.calc.internal;version="[0.1.0,0.2.0)"
 
