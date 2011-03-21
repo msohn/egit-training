@@ -42,12 +42,21 @@ public class Calculator {
 		new Square();
 	}
 
+	// fixed: textProvider value may be null or empty String
+	private String getTextOrZero () {
+		String currentInput = textProvider.getDisplayText();
+		if ((currentInput == null) || (currentInput.isEmpty())) {
+			// most simple fix: empty means 0
+			currentInput = "0";
+		}
+		return currentInput;
+	}
+
 	private void calculate(String cmdName) {
 		float curValue;
 		float newValue = 0;
 
-		// get current value of display
-		curValue = Float.parseFloat(textProvider.getDisplayText());
+		curValue = Float.parseFloat(getTextOrZero());
 
 		Operation currentOp = Operations.INSTANCE.getOperation(cmdName);
 		if ((currentOp instanceof BinaryOperation) && (cmd == null)) {
@@ -96,7 +105,7 @@ public class Calculator {
 			if (Character.isDigit(digit) || digit == '.') {
 				if (clearText) {
 					// save current value and clear the display
-					value = Float.parseFloat(textProvider.getDisplayText());
+					value = Float.parseFloat(getTextOrZero());
 					textProvider.setDisplayText("");
 					setClearText(false);
 				}
