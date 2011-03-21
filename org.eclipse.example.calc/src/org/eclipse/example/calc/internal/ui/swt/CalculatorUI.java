@@ -82,6 +82,8 @@ public class CalculatorUI implements TextProvider, SelectionListener {
 		display = new Text(shell, SWT.BORDER_SOLID | SWT.RIGHT);
 		display.setLayoutData(gridData);
 		display.setText("0");
+		display.setEditable(false);
+		display.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
 		calculator.setClearText(true);
 	}
 
