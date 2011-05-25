@@ -30,6 +30,6 @@ public class SquareTest extends AbstractOperationTest {
 
 	@Test
 	public void testGetName() {
-		assertEquals(op.getName(), "x²");
+		assertEquals(op.getName(), "^2");
 	}
 }

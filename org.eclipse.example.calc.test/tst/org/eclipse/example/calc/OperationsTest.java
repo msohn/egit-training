@@ -53,7 +53,7 @@ public class OperationsTest {
 		assertTrue(Operations.INSTANCE.getOperation("+") instanceof Plus);
 		assertTrue(Operations.INSTANCE.getOperation("-") instanceof Minus);
 		assertTrue(Operations.INSTANCE.getOperation("=") instanceof Equals);
-		assertTrue(Operations.INSTANCE.getOperation("x²") instanceof Square);
+		assertTrue(Operations.INSTANCE.getOperation("^2") instanceof Square);
 	}
 
 	@Test
