@@ -65,7 +65,7 @@
         </property>
       </activation>
       <properties>
-        <eclipse-site>http://download.eclipse.org/releases/galileo</eclipse-site>
+        <eclipse-site>http://nexus:8081/nexus/content/repositories/build.milestones.unzip/org/eclipse/download/eclipse/org.eclipse.platform-p2repo/3.5.2/org.eclipse.platform-p2repo-3.5.2.zip-unzip/</eclipse-site>
         <platform-version>[3.5,3.6)</platform-version>
       </properties>
     </profile>
@@ -78,7 +78,7 @@
         </property>
       </activation>
       <properties>
-        <eclipse-site>http://download.eclipse.org/releases/helios</eclipse-site>
+        <eclipse-site>http://nexus:8081/nexus/content/repositories/build.milestones.unzip/org/eclipse/download/eclipse/org.eclipse.platform.source/3.6.2/org.eclipse.platform.source-3.6.2.zip-unzip/</eclipse-site>
         <platform-version>[3.6,3.7)</platform-version>
       </properties>
     </profile>
@@ -91,11 +91,19 @@
         </property>
       </activation>
       <properties>
-        <eclipse-site>http://download.eclipse.org/releases/indigo</eclipse-site>
+        <eclipse-site>http://nexus:8081/nexus/content/repositories/build.milestones.unzip/org/eclipse/download/eclipse/org.eclipse.platform.source/3.7/org.eclipse.platform.source-3.7.zip-unzip</eclipse-site>
         <platform-version>[3.7,3.8)</platform-version>
       </properties>
     </profile>
   </profiles>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>snapshots.egit.training</id>
+      <url>http://nexus:8081/nexus/content/repositories/deploy.snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
 
   <modules>
     <module>org.eclipse.example.calc</module>
@@ -107,6 +115,11 @@
       <id>eclipse-platform</id>
       <layout>p2</layout>
       <url>${eclipse-site}</url>
+    </repository>
+    <repository>
+      <id>testing-tools</id>
+      <layout>p2</layout>
+      <url>http://nexus:8081/nexus/content/repositories/build.milestones.unzip/com/sap/ldi/testingtools/com.sap.ldi.testingtools.updatesite/0.0.8/com.sap.ldi.testingtools.updatesite-0.0.8-assembly.zip-unzip/</url>
     </repository>
   </repositories>
 
