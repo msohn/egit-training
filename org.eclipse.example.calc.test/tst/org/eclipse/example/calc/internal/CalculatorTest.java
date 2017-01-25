@@ -71,7 +71,7 @@ public class CalculatorTest {
 		Calculator calculator = new Calculator(textProvider);
 
 		calculator.handleButtonClick("2");
-		calculator.handleButtonClick("x²");
+		calculator.handleButtonClick("^2");
 
 		assertEquals("4.0", textProvider.getDisplayText());
 	}

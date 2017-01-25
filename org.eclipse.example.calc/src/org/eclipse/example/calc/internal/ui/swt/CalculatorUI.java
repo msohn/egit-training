@@ -82,18 +82,29 @@ public class CalculatorUI implements TextProvider, SelectionListener {
 		display = new Text(shell, SWT.BORDER_SOLID | SWT.RIGHT);
 		display.setLayoutData(gridData);
 		display.setText("0");
+		display.setEditable(false);
+		display.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
 		calculator.setClearText(true);
 	}
 
 	private void setupNumberButtons() {
 		Composite numberButtonsPanel = new Composite(shell, SWT.NONE);
-		numberButtonsPanel.setLayout(new GridLayout(4, true));
+		numberButtonsPanel.setLayout(new GridLayout(3, true));
 		numberButtons = new Button[11];
 
-		for (int i = 0; i < numberButtons.length - 1; i++) {
+		for (int i = 7; i < numberButtons.length - 1; i++) {
 			addNumberButton(numberButtonsPanel, i, Integer.valueOf(i)
 					.toString());
 		}
+		for (int i = 4; i < 7; i++) {
+			addNumberButton(numberButtonsPanel, i, Integer.valueOf(i)
+					.toString());
+		}
+		for (int i = 1; i < 4; i++) {
+			addNumberButton(numberButtonsPanel, i, Integer.valueOf(i)
+					.toString());
+		}
+		addNumberButton(numberButtonsPanel, 0, "0");
 		addNumberButton(numberButtonsPanel, 10, ".");
 	}
 
