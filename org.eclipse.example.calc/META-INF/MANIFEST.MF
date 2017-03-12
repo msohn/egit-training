@@ -4,7 +4,7 @@ Bundle-Name: Calculator
 Bundle-SymbolicName: org.eclipse.example.calc
 Bundle-Version: 0.1.0.qualifier
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.eclipse.swt;bundle-version="[3.5.0,4.0.0)"
 Export-Package: org.eclipse.example.calc;version="0.1.0",
  org.eclipse.example.calc.internal;version="0.1.0";x-internal:=true,
