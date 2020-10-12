@@ -5,9 +5,9 @@ Bundle-SymbolicName: org.eclipse.example.calc
 Bundle-Version: 0.1.0.qualifier
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Require-Bundle: org.eclipse.swt;bundle-version="[3.5.0,4.0.0)"
 Export-Package: org.eclipse.example.calc;version="0.1.0",
  org.eclipse.example.calc.internal;version="0.1.0";x-internal:=true,
  org.eclipse.example.calc.internal.operations;version="0.1.0";x-internal:=true,
  org.eclipse.example.calc.internal.ui.swing;version="0.1.0";x-internal:=true,
  org.eclipse.example.calc.internal.ui.swt;version="0.1.0";x-internal:=true
+Require-Bundle: org.eclipse.swt;bundle-version="[3.115.0,4.0.0)"

@@ -58,20 +58,7 @@
 
   <profiles>
     <profile>
-      <id>platform-mars</id>
-      <activation>
-        <property>
-          <name>platform-version-name</name>
-          <value>mars</value>
-        </property>
-      </activation>
-      <properties>
-        <eclipse-site>http://download.eclipse.org/releases/mars</eclipse-site>
-        <platform-version>[4,5,4.6)</platform-version>
-      </properties>
-    </profile>
-    <profile>
-      <id>platform-neon</id>
+      <id>platform-2020-09</id>
       <activation>
         <activeByDefault>true</activeByDefault>
         <property>
@@ -80,8 +67,8 @@
         </property>
       </activation>
       <properties>
-        <eclipse-site>http://download.eclipse.org/releases/neon</eclipse-site>
-        <platform-version>[4.6,4.7)</platform-version>
+        <eclipse-site>https://download.eclipse.org/releases/2020-09</eclipse-site>
+        <platform-version>[4.17,4.18)</platform-version>
       </properties>
     </profile>
   </profiles>
@@ -118,17 +105,7 @@
             <environment>
               <os>linux</os>
               <ws>gtk</ws>
-              <arch>x86</arch>
-            </environment>
-            <environment>
-              <os>linux</os>
-              <ws>gtk</ws>
               <arch>x86_64</arch>
-            </environment>
-            <environment>
-              <os>win32</os>
-              <ws>win32</ws>
-              <arch>x86</arch>
             </environment>
             <environment>
               <os>win32</os>
