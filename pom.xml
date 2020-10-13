@@ -51,7 +51,7 @@
   <properties>
     <calc-version>0.1.0-SNAPSHOT</calc-version>
     <tycho-version>0.10.0</tycho-version>
-    <junit-version>4.8.1</junit-version>
+    <junit-version>4.13.1</junit-version>
   </properties>
 
   <profiles>
